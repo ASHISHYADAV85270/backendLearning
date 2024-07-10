@@ -4,3 +4,8 @@
 
 
 Which of the third party services we are using first we will add the images to the server temporally and then by third process we push it to the third party  
+
+
+### Database 
+1. Use try catch or promise while connecting db
+2. Db is mostly in other continent so use async/await
