@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "Learning Backend Development",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js",
+    "dev":"nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ashish Yadav",
@@ -12,5 +14,8 @@
   "dependencies": {
     "dotenv": "^16.4.5",
     "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
   }
 }
