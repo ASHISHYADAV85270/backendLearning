@@ -9,3 +9,11 @@ Which of the third party services we are using first we will add the images to t
 ### Database 
 1. Use try catch or promise while connecting db
 2. Db is mostly in other continent so use async/await
+
+
+### Notes
+1. app.use is used for configration and middlewares
+2. (err,req,res,next)=>{   next()<kidhar jana hai>}
+3. ![alt text](image.png)
+
+
