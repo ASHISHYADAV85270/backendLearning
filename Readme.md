@@ -14,6 +14,5 @@ Which of the third party services we are using first we will add the images to t
 ### Notes
 1. app.use is used for configration and middlewares
 2. (err,req,res,next)=>{   next()<kidhar jana hai>}
-3. ![alt text](image.png)
 
 
