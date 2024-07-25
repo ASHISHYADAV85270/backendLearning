@@ -18,6 +18,7 @@ app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extends: true, limit: "16kb" }));
 
 // for storing images pdf in your server for a short duration
+// mtlb public folder ko static ki tarah use krna
 app.use(express.static("public"));
 
 // for doing crud operations in cookies of the user we use cookieParser
