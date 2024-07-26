@@ -16,3 +16,13 @@ Which of the third party services we are using first we will add the images to t
 2. (err,req,res,next)=>{   next()<kidhar jana hai>}
 
 
+## Registeration 
+1. phle inputs purai hai y nhi from front ends
+2. agar purai hai too already user to nhi hai same identity sai:  username or useremail
+3. check for images
+4. check for avatar mandatory
+5. upload them(images) to cloudinary :: bha sai url milegaa
+6. create  a user object ->
+7. remove pass and referesh token
+8. check for user creation
+9. aur return response

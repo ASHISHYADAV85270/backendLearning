@@ -4,19 +4,9 @@ import { User } from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 const registerUser = asyncHandler(async (req, res) => {
-  // phle inputs purai hai y nhi from front ends
-  // agar purai hai too already user to nhi hai same identity sai : username or useremail
-  // check for images
-  // check for avatar
-  // upload them(images) to cloudinary :: bha sai url milegaa
-  // create  a user object ->
-  // remove pass and referesh token
-  // check for user creation
-  // aur return response
 
   const data = req.body;
-  const { userName, email, fullName, watchHistory, password, refreshToken } =
-    data;
+  const { userName, email, fullName, password } = data;
 
   if (
     [fullName, email, userName, password].some((field) => {
@@ -50,7 +40,7 @@ const registerUser = asyncHandler(async (req, res) => {
     coverImage: coverImage?.url || "",
     email,
     password,
-    userName: userName.tolowercase(),
+    userName: userName,
   });
 
   const createdUser = await User.findById(user._id).select(

@@ -17,7 +17,8 @@ cloudinary.config({
       resource_type: "auto",
     });
     // file has been uploaded successfully
-    console.log("File is uploaded on cloudinary", response);
+    // console.log("File is uploaded on cloudinary", response);
+    fs.unlinkSync(localFilePath);
     return response;
   } catch (error) {
     // remove the locally save temporary file as the upload operation got failed
