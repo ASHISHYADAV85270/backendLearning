@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 const app = express();
-
+// Middle Wares
 app.use(
   cors({
     origin: process.env.CORS_ORIGIN,
@@ -24,4 +24,10 @@ app.use(express.static("public"));
 // for doing crud operations in cookies of the user we use cookieParser
 app.use(cookieParser());
 
+/* routes */
+import userRouter from "../src/routes/user.routes.js";
+
+/* routes declaration */
+app.use("/api/v1/users", userRouter);
+// localhost:8000/api/v1/users/register
 export { app };
