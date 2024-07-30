@@ -3,6 +3,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { User } from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
+import jwt from "jsonwebtoken";
 
 const generateAccessAndRefreshToken = async (userId) => {
   try {
@@ -149,4 +150,60 @@ const logOutUser = asyncHandler(async (req, res) => {
     .json(200, {}, "User Logged Out Successfully");
 });
 
-export { registerUser, loginUser, logOutUser };
+const generateAccessTokenFromRefereshToken = async (req, res) => {
+  try {
+    const incomingRefreshToken =
+      req.cookies?.refreshToken || req.body?.refreshToken;
+
+    if (!incomingRefreshToken) {
+      throw new ApiError(401, "Unauthorised Request");
+    }
+    const decodedInformation = await jwt.verify(
+      incomingRefreshToken,
+      process.env.REFERESH_TOKEN_SECRET
+    );
+    // payload hmesha nhi hota hai but hmm logo nai id daali thi payload mai
+    const incomingUser = User.findById(decodedInformation?._id);
+    if (!user) {
+      throw new ApiError(401, "Invalid Refresh Token");
+    }
+
+    if (incomingUser.refreshToken !== incomingRefreshToken) {
+      throw new ApiError(401, "Refresh Token is expired or used");
+    }
+
+    const { accessToken, refreshToken } = await generateAccessAndRefreshToken(
+      incomingUser._id
+    );
+
+    // no body can modify from front end .. only can be modified from backend
+    const options = {
+      httpOnly: true,
+      secure: true,
+    };
+
+    return res
+      .status(200)
+      .cookie("accessToken", accessToken, options)
+      .cookie("refreshToken", refreshToken, options)
+      .json(
+        new ApiResponse(
+          200,
+          {
+            accessToken,
+            refreshToken,
+          },
+          "Access Token Refreshed"
+        )
+      );
+  } catch (error) {
+    throw new ApiError(401, error?.message || "Invalid Refresh Token");
+  }
+};
+
+export {
+  registerUser,
+  loginUser,
+  logOutUser,
+  generateAccessTokenFromRefereshToken,
+};

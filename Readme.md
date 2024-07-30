@@ -39,3 +39,10 @@ Which of the third party services we are using first we will add the images to t
 ## LogOut 
 1. Cookies delete krdooo
 2. RefreshToken koo remove krdo User sai 
+
+
+## Point To Be Noted 
+1. access token is for short duration on the other hand referesh token is for long duration
+2. agar access token expire hojaiga  to  hmm user ko  401 bhej dengai but user kai paas ek url hoga jiskoo boo hit krega 
+3. aur uss kai paas refresh token already hai to usko use krke bo dubara access token generate krlega 
+4. Ismai dubara dubara login nhi krna pdtaaa
