@@ -1,5 +1,5 @@
-import { User } from "../models/user.model";
-import { ApiError } from "../utils/ApiError";
+import { User } from "../models/user.model.js";
+import { ApiError } from "../utils/ApiError.js";
 import jwt from "jsonwebtoken";
 //  it will verify user is there or not
 export const verifyJWT = async (req, res, next) => {
@@ -15,7 +15,6 @@ export const verifyJWT = async (req, res, next) => {
       token,
       process.env.ACCESS_TOKEN_SECRET
     );
-
     const user = await User.findById(decodedInformation?._id).select(
       "-password -refreshToken"
     );
